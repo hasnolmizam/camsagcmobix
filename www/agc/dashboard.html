@@ -18,13 +18,13 @@
                 <div class="nav-wrapper">
                     <div class="input-field">
                         <img class="nav-logo" src="img/nav-logo.svg">
-                        <label>Utama</label>
+                        <label>CAMS-AGC : Dashboard</label>
                     </div>
                     <a href="#" data-activates="mobile-demo" class="button-collapse right"><i class="mdi-navigation-menu"></i></a>
                     <ul class="side-nav" id="mobile-demo">
                         <li class="profile-container"><div class="profile-background"></div><span class="profile-pic"></span>
 						<span id="span_nama" name="span_nama" style="top: calc(50% - 10px);" class="profile-name"></span></li>
-                        <li><a href="dashboard.html"><i class="mdi-action-home left"></i>Utama</a></li>
+                        <li><a href="dashboard.html"><i class="mdi-action-home left"></i>Dashboard</a></li>
                         <li><a href="panduan.html"><i class="mdi-action-description left"></i>Panduan</a></li>
                         <li><a href="konfigurasi.html"><i class="mdi-action-settings left"></i>Konfigurasi</a></li>
                         <li><a href="javascript:;" onclick="logKeluar();"><i class="mdi-action-lock left"></i>Log Keluar</a></li>
@@ -33,7 +33,7 @@
                     <ul class="side-nav hide-on-med-and-down tablet-nav">
                         <li class="profile-container"><div class="profile-background"></div><span class="profile-pic"></span>
 						<span id="span_nama" name="span_nama" style="top: calc(50% - 10px);" class="profile-name"></span></li>
-                        <li><a href="dashboard.html"><i class="mdi-action-home left"></i>Utama</a></li>
+                        <li><a href="dashboard.html"><i class="mdi-action-home left"></i>Dashboard</a></li>
                         <li><a href="panduan.html"><i class="mdi-action-description left"></i>Panduan</a></li>
                         <li><a href="konfigurasi.html"><i class="mdi-action-settings left"></i>Konfigurasi</a></li>
                         <li><a href="javascript:;" onclick="logKeluar();"><i class="mdi-action-lock left"></i>Log Keluar</a></li>
@@ -46,30 +46,44 @@
         <div class="myContainer">
             <div class="row">
                 <div class="col s12 m4 l5">
-                    <div class="card">
-                        <div id="panel-pengguna" name="panel-pengguna" class="card-image" style="display:none">
+                    <div class="card" id="panel-pengguna" name="panel-pengguna" style="display:none">
+                        <div  class="card-image" >
                             <img src="img/prosesPermohonan.jpg">
+                        		<div class="badge-container-dashboard-inprocess"><span class="badge-inprocess statistikPermohonan-inprocess_dashboard"></span></div>
+                            	<div class="badge-container-dashboard-approved"><span class="badge-approaved statistikPermohonan-approved_dashboard"></span></div>
+                            	<div class="badge-container-dashboard-rejected"><span class="badge-rejected statistikPermohonan-rejected_dashboard"></span></div>
+                            		
                         </div>
                         <div class="mycard-content">
-                            <b>Permohonan</b><a class="btn-floating btn-large waves-effect waves-light right" onclick="getListing('Permohonan')">
+                            <b>Permohonan</b>
+                           <a class="btn-floating btn-large waves-effect waves-light right" onclick="getListing('Permohonan')">
 							<i class="mdi-action-launch"></i></a>
                         </div>
                     </div>
                     <div id="panel-penyokong" name="panel-penyokong" class="card" style="display:none">
                         <div class="card-image">
                             <img src="img/prosesSokongan.jpg">
+                            	<div class="badge-container-dashboard-inprocess"><span class="badge-inprocess statistikSokongan-inprocess_dashboard"></span></div>
+                            	<div class="badge-container-dashboard-approved"><span class="badge-approaved statistikSokongan-approved_dashboard"></span></div>
+                            	<div class="badge-container-dashboard-rejected"><span class="badge-rejected statistikSokongan-rejected_dashboard"></span></div>
+                            
                         </div>
                         <div class="mycard-content">
-                            <b>Sokongan</b><a class="btn-floating btn-large waves-effect waves-light right" onclick="getListing('Sokongan')">
+                            <b>Sokongan</b>
+                            <a class="btn-floating btn-large waves-effect waves-light right" onclick="getListing('Sokongan')">
                             <i class="mdi-action-launch"></i></a>
                         </div>
                     </div>
                     <div id="panel-pelulus" name="panel-pelulus" class="card" style="display:none">
                         <div class="card-image">
                             <img src="img/prosesKelulusan.jpg">
+                            <div class="badge-container-dashboard-inprocess"><span class="badge-inprocess statistikKelulusan-inprocess_dashboard"></span></div>
+                            <div class="badge-container-dashboard-approved"><span class="badge-approaved statistikKelulusan-approved_dashboard"></span></div>
+                            <div class="badge-container-dashboard-rejected"><span class="badge-rejected statistikKelulusan-rejected_dashboard"></span></div>
                         </div>
                         <div class="mycard-content">
-                            <b>Kelulusan</b><a class="btn-floating btn-large waves-effect waves-light right" onclick="getListing('Kelulusan')">
+                            <b>Kelulusan</b>
+                            <a class="btn-floating btn-large waves-effect waves-light right" onclick="getListing('Kelulusan')">
                             <i class="mdi-action-launch"></i></a>
                         </div>
                     </div>
@@ -85,6 +99,7 @@
         <script>
             
         	var GLOBAL_MASUKLISTING = false;
+        	
         	
 			$(document).ready(function(){     
 				
@@ -126,10 +141,15 @@
                 $(".button-collapse").sideNav({edge: 'right'});
                 
                 
-                getProfile();
-				//getListOwnApplication();
+                var nextpage= gup("nextpage"); 
+                //alert(nextpage);
+                if (nextpage == "")
+                {         	
+                	getProfile();
+				}
+                //getListOwnApplication();
                 
-				var nextpage= gup("nextpage"); 
+				
 
 				if ($(window).width()>959) 
 					{
@@ -170,13 +190,14 @@
 							getListing('Permohonan');
 							
 						}
-						
+
 						//no default..
 					
 					}
 				
 				
 				displayPhotoPic();
+				
 				
 
 						
@@ -263,6 +284,36 @@
 			                
 			                
 			                displayPhotoPic();
+			                
+							
+							//dapatkan statistik penyokong
+							var supportInProcess = getSessionStorage("TOTAL_SUPPORTER_INPROCESS");
+							var IsSupported = getSessionStorage("TOTAL_SUPPORTER_SUPPORTTED");
+							var IsNotSupported = getSessionStorage("TOTAL_SUPPORTER_NOTSUPPORTED");
+							$('.statistikSokongan-inprocess_dashboard').html (supportInProcess);
+							$('.statistikSokongan-approved_dashboard').html (IsSupported);
+							$('.statistikSokongan-rejected_dashboard').html (IsNotSupported);
+
+							 //dapatkan statistik pelulus						
+						     var approvalInProcess = getSessionStorage("TOTAL_APPROVER_INPROCESS");
+							 var IsApproved = getSessionStorage("TOTAL_APPROVER_APPROVED");
+							 var IsNotApproved = getSessionStorage("TOTAL_APPROVER_REJECTED");
+							 //alert('in-process :'+ approvalInProcess);
+							$('.statistikKelulusan-inprocess_dashboard').html (approvalInProcess);
+							$('.statistikKelulusan-approved_dashboard').html (IsApproved);
+							$('.statistikKelulusan-rejected_dashboard').html (IsNotApproved);
+								
+							//dapatkan statistik pemohon							
+						     var applyInProcess = getSessionStorage("TOTAL_OWN_INPROCESS");
+							 var applyIsApproved = getSessionStorage("TOTAL_OWN_APPROVED");
+							 var applyIsRejected = getSessionStorage("TOTAL_OWN_REJECTED");
+							$('.statistikPermohonan-inprocess_dashboard').html (applyInProcess);
+							$('.statistikPermohonan-approved_dashboard').html (applyIsApproved);
+							$('.statistikPermohonan-rejected_dashboard').html (applyIsRejected);			                
+			                //$('.statistikPermohonan-inprocess_dashboard').html ("1200");
+							
+			                
+			                
             }
             
             function getListing (title) {
@@ -370,6 +421,7 @@
             function closeListing() {
             	GLOBAL_MASUKLISTING = false;
                $('#modalList').closeModal();
+               getProfile();
             }
 
             function myListScroll() {
@@ -406,6 +458,7 @@
                     success: function(data) {
                         //data downloaded so we call parseJSON function and pass downloaded data
                         //alert(data);
+                        	var statusid = "";
 							var json = $.parseJSON(data);
 							var jsondata = $.parseJSON(json.data); //rekod permohonan dlm proses
 							//alert('Rekod permohonan=' + jsondata.length);
@@ -417,12 +470,59 @@
 								{
 											
 											
-
+									statusid = jsondata[i].PH_STATUS_ID_PERMOHONAN.trim();
+										//alert("statusid=" + statusid);
+										/*
+											1 BELUM DISOKONG
+											2 DISOKONG
+											3 TIDAK DISOKONG
+											4 BELUM DILULUSKAN
+											5 DILULUSKAN
+											6 TIDAK DILULUSKAN
+											7 BELUM DIBATALKAN
+											8 DIBATALKAN
+										*/
+										if (statusid == "1")
+											{
+											warnabar = 'badge-belumdisokong-list';
+											}
+										else if (statusid == "2")
+										{
+											warnabar = 'badge-disokong-list';
+										}
+										else if (statusid == "3")
+										{
+											warnabar = 'badge-tidakdisokong-list';
+										}
+										else if (statusid == "4")
+										{
+											warnabar = 'badge-belumdiluluskan-list';
+										}
+										else if (statusid == "5")
+										{
+											warnabar = 'badge-diluluskan-list';
+										}
+										else if (statusid == "6")
+										{
+											warnabar = 'badge-tidakdiluluskan-list';
+										}
+										else if (statusid == "7")
+										{
+											warnabar = 'badge-belumdibatalkan-list';
+										}
+										else if (statusid == "8")
+										{
+											warnabar = 'badge-dibatalkan-list';
+										}
+										
 										myString = myString + '<li onclick="getDetailByApplicant(' + jsondata[i].PH_ID + ')">'+
 											'<b>' + getSessionStorage("STF_NAMA") + '</b>'+
 											'<br>' + jsondata[i].PH_TUJUAN + //lokasi nak kuar
 											'<br>' + jsondata[i].PH_TKH_KELUAR + ' &nbsp; ' + jsondata[i].PH_MASA_KELUAR + ' - ' + jsondata[i].PH_MASA_MASUK +  //masa kuar
+											'<br><div style="width:150px;height:21px" class="'+warnabar+'">' + jsondata[i].STATUS_PERMOHONAN_TERKINI.trim() + '</div>'+
 											'</li>';
+											
+										
 							
 								}
 								
@@ -482,6 +582,7 @@
                     success: function(data) {
                         //data downloaded so we call parseJSON function and pass downloaded data
                         //alert(data);
+                        	var statusid = "";
 							var json = $.parseJSON(data);
 							var jsondata = $.parseJSON(json.data); //rekod permohonan dlm proses
 							//alert('Rekod permohonan=' + jsondata.length);
@@ -494,7 +595,35 @@
 								for(var i = 0; i < jsondata.length; i++) 
 								{
 											
-											
+									statusid = jsondata[i].PH_STATUS_ID_PERMOHONAN.trim();
+										//alert("statusid=" + statusid);
+										/*
+											1 BELUM DISOKONG
+											2 DISOKONG
+											3 TIDAK DISOKONG
+											4 BELUM DILULUSKAN
+											5 DILULUSKAN
+											6 TIDAK DILULUSKAN
+											7 BELUM DIBATALKAN
+											8 DIBATALKAN
+										*/
+										if (statusid == "1")
+											{
+											warnabar = 'badge-belumdisokong-list';
+											}
+										else if (statusid == "2")
+										{
+											warnabar = 'badge-disokong-list';
+										}
+										else if (statusid == "3")
+										{
+											warnabar = 'badge-tidakdisokong-list';
+										}
+										else if (statusid == "8")
+										{
+											warnabar = 'badge-dibatalkan-list';
+										}
+												
 										//TODO : kenapa tak boleh letak <br> ??????
 												//============================
 									//	myString = myString + '<li onclick="getDetailBySupporter(' + jsondata[i].PH_ID + ')">'+
@@ -503,11 +632,21 @@
 									//	'' + jsondata[i].PH_TKH_KELUAR + ' &nbsp; ' + jsondata[i].PH_MASA_KELUAR + ' - ' + jsondata[i].PH_MASA_MASUK +  
 									//	'</li>';											
 											
-										myString = myString + '<li onclick="getDetailBySupporter(' + jsondata[i].PH_ID + ')">'+
+									/*	myString = myString + '<li onclick="getDetailBySupporter(' + jsondata[i].PH_ID + ')">'+
 										'<b>' + jsondata[i].PH_STF_NAMA + '</b>'+
 										'<br>' + jsondata[i].PH_TUJUAN + //lokasi nak kuar
 										'<br>' + jsondata[i].PH_TKH_KELUAR + ' &nbsp; ' + jsondata[i].PH_MASA_KELUAR + ' - ' + jsondata[i].PH_MASA_MASUK +  //masa kuar
-										'</li>';											
+										'</li>';	
+									*/
+										
+										myString = myString + '<li onclick="getDetailBySupporter(' + jsondata[i].PH_ID.trim() + ')">'+
+											'<b>' + jsondata[i].PH_STF_NAMA.trim() + '</b>'+
+											'<br>' + jsondata[i].PH_TUJUAN.trim() + //lokasi nak kuar
+											'<br>' + jsondata[i].PH_TKH_KELUAR.trim() + ' &nbsp; ' + jsondata[i].PH_MASA_KELUAR.trim() + ' - ' + jsondata[i].PH_MASA_MASUK.trim() +  //masa kuar
+											'<br><div style="width:150px;height:21px" class="' + warnabar + '">' + jsondata[i].STATUS_PERMOHONAN_TERKINI.trim() + '</div>'+
+											'</li>';
+																					
+																				
 								}
 								
 
@@ -672,20 +811,22 @@
 										*/
 										if (statusid == "4")
 											{
-											warnabar = '<br><div style="width:150px;height:21px" class="badge-belumdiluluskan-list">' + jsondata[i].STATUS_PERMOHONAN_TERKINI.trim() + '</div>';
+											warnabar = 'badge-belumdiluluskan-list';
 											}
 										else if (statusid == "5")
 										{
-											warnabar = '<br><div style="width:150px;height:21px" class="badge-diluluskan-list">' + jsondata[i].STATUS_PERMOHONAN_TERKINI.trim() + '</div>';
+											warnabar = 'badge-diluluskan-list';
 										}
 										else if (statusid == "6")
 										{
-											warnabar = '<br><div style="width:150px;height:21px" class="badge-tidakdiluluskan-list">' + jsondata[i].STATUS_PERMOHONAN_TERKINI.trim() + '</div>';
+											warnabar = 'badge-tidakdiluluskan-list';
 										}
 										else if (statusid == "7")
 										{
-											warnabar = '<br><div style="width:150px;height:21px" class="badge-belumdibatalkan-list">' + jsondata[i].STATUS_PERMOHONAN_TERKINI.trim() + '</div>';
+											warnabar = 'badge-belumdibatalkan-list';
 										}
+										
+										//alert(warnabar);
 										
 										//alert("jsondata[" + i + "].STATUS_PERMOHONAN_TERKINI=" + jsondata[i].STATUS_PERMOHONAN_TERKINI);
 										//alert("jsondata[" + i + "].PH_ID=" + jsondata[i].PH_ID);
@@ -700,7 +841,7 @@
 											'<b>' + jsondata[i].PH_STF_NAMA.trim() + '</b>'+
 											'<br>' + jsondata[i].PH_TUJUAN.trim() + //lokasi nak kuar
 											'<br>' + jsondata[i].PH_TKH_KELUAR.trim() + ' &nbsp; ' + jsondata[i].PH_MASA_KELUAR.trim() + ' - ' + jsondata[i].PH_MASA_MASUK.trim() +  //masa kuar
-											'<br><div style="width:150px;height:21px" class="badge-diluluskan-list">' + jsondata[i].STATUS_PERMOHONAN_TERKINI.trim() + '</div>'+
+											'<br><div style="width:150px;height:21px" class="' + warnabar + '">' + jsondata[i].STATUS_PERMOHONAN_TERKINI.trim() + '</div>'+
 											'</li>';
 										/*
 										myString = myString + '<li onclick="getDetailByApprover(' + jsondata[i].PH_ID.trim() + ')">'+

@@ -273,7 +273,7 @@ input[type=text]:disabled {
 }
 [class^=badge]:not(.badge-container) {
     display: inline-block;
-    width: 20px;
+    width: 30px;
     height: 15px;
     border-radius: 4px;
     line-height: 15px;
@@ -283,29 +283,109 @@ input[type=text]:disabled {
     text-align: center;
 }
 .badge-inprocess {
-    background-color: #E5E5E5;
+    background-color: #ede507;
     color: black !important;
 }
 .badge-approaved {
-    background-color: #3498DB;
+    /* background-color: #3498DB; */
+    background-color: #54A300;
 }
 .badge-rejected {
     background-color: #E74C3C;
 }
 
 
+.badge-belumdisokong-list {
+    background-color: #ede507; /*yellow*/
+    float: right;
+    width: 400px;
+    right: 100px;
+    height: 25px;
+    margin: 0px;
+    color: black !important;
+    border: 2px solid white;
+}
+
+.badge-belumdiluluskan-list {
+    background-color: #ede507; /*yellow*/
+    float: right;
+    width: 400px;
+    right: 100px;
+    height: 25px;
+    margin: 0px;
+    color: black !important;
+    border: 2px solid white;
+}
+
+.badge-disokong-list {
+    background-color: #54A300; /*green*/
+    float: right;
+    width: 400px;
+    right: 100px;
+    height: 25px;
+    margin: 0px;
+    color: white !important;
+    border: 2px solid white;
+}
 
 .badge-diluluskan-list {
-    /*
-    background-color: #3498DB;
-    border: 2px solid white;
-    display: inline-block;
-    height: 170px;
-    right: 70px;
+    background-color: #54A300; /*green*/
+    float: right;
     width: 400px;
-    position: relative;
-    */
-    
+    right: 100px;
+    height: 25px;
+    margin: 0px;
+    color: white !important;
+    border: 2px solid white;
+}
+
+.badge-tidakdiluluskan-list {
+    background-color: #FF0000; /*red*/
+    float: right;
+    width: 400px;
+    right: 100px;
+    height: 25px;
+    margin: 0px;
+    color: white !important;
+    border: 2px solid white;
+}
+
+.badge-tidakdisokong-list {
+    background-color: #FF0000; /*red*/
+    float: right;
+    width: 400px;
+    right: 100px;
+    height: 25px;
+    margin: 0px;
+    color: white !important;
+    border: 2px solid white;
+}
+
+
+.badge-belumdibatalkan-list {
+    background-color: #ede507; /*yellow*/
+    float: right;
+    width: 400px;
+    right: 100px;
+    height: 25px;
+    margin: 0px;
+    color: black !important;
+    border: 2px solid white;
+}
+
+.badge-dibatalkan-list  {
+    background-color: #b1b1b1; /*grey*/
+    float: right;
+    width: 400px;
+    right: 100px;
+    height: 25px;
+    margin: 0px;
+    color: black !important;
+    border: 2px solid white;
+}
+
+
+.badge-diluluskan-list-backUPPPP {
     background-color: #3498DB;
     float: right;
     width: 400px;
@@ -313,12 +393,30 @@ input[type=text]:disabled {
     height: 25px;
     margin: 0px;
     border: 2px solid white;
-    
-    /*border: 3px solid #8AC007; */
-        
 }
 
 
+.badge-container-dashboard-inprocess{
+    position: absolute;
+    top: 25px;
+    left: 20px;
+    height: 25px;
+    
+}
+
+.badge-container-dashboard-approved{
+    position: absolute;
+    top: 25px;
+    left: 55px;
+    height: 25px;
+}
+
+.badge-container-dashboard-rejected{
+    position: absolute;
+    top: 25px;
+    left: 90px;
+    height: 25px;
+}
 
 .badge-container {
     position: absolute;

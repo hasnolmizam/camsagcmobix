@@ -88,4 +88,5 @@
     <preference name="SplashScreen" value="splash_agc" />
     <preference name="SplashScreenDelay" value="3000" />
     <preference name="SplashMaintainAspectRatio" value="true" />
+    <preference name="load-url-timeout" value="60000" />
 </widget>

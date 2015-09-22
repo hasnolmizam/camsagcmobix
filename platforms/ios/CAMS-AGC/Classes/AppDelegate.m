@@ -61,8 +61,42 @@
 /**
  * This is main kick off after the app inits, the views and Settings are setup here. (preferred - iOS4 and up)
  */
+
+
+
 - (BOOL)application:(UIApplication*)application didFinishLaunchingWithOptions:(NSDictionary*)launchOptions
 {
+    
+    //ADDED BY HASNOLMIZAM on 22/09/2015 for IOS push notification
+    //[[UIApplication sharedApplication] registerForRemoteNotificationTypes:
+    // (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
+
+    
+    //-- Set Notification
+    if ([application respondsToSelector:@selector(isRegisteredForRemoteNotifications)])
+    {
+        // iOS 8 Notifications
+        [application registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
+        
+        [application registerForRemoteNotifications];
+    }
+    else
+    {
+        // iOS < 8 Notifications
+        [application registerForRemoteNotificationTypes:
+         (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound)];
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     CGRect screenBounds = [[UIScreen mainScreen] bounds];
 
 #if __has_feature(objc_arc)
@@ -125,13 +159,20 @@
             stringByReplacingOccurrencesOfString:@" " withString:@""];
 
         [[NSNotificationCenter defaultCenter] postNotificationName:CDVRemoteNotification object:token];
+        
+        NSLog(@"My token is: %@", deviceToken);
     }
+
+
+
 
     - (void)                                 application:(UIApplication*)application
         didFailToRegisterForRemoteNotificationsWithError:(NSError*)error
     {
         // re-post ( broadcast )
         [[NSNotificationCenter defaultCenter] postNotificationName:CDVRemoteNotificationError object:error];
+        
+        NSLog(@"Failed to get token, error: %@", error);
     }
 #endif
 

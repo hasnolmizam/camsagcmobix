@@ -3,13 +3,25 @@ var GLOBAL_IP = "http://10.17.14.210/cams";
 
 	function logKeluar()
 	{
-		navigator.notification.confirm(
-			    "Adakah anda pasti untuk keluar dari aplikasi ini?",  // message
-		        onConfirmKeluar,                // callback to invoke with index of button pressed
-		        "CAMS-AGC", // title
-		        'YA,BATAL'          // buttonLabels
-		    );
+	
+		var devicePlatform = device.platform;
+		if (devicePlatform == "Android")
+		{
+			navigator.notification.confirm(
+				    "Adakah anda pasti untuk keluar dari aplikasi ini?",  // message
+			        onConfirmKeluar,                // callback to invoke with index of button pressed
+			        "CAMS-AGC", // title
+			        'YA,BATAL'          // buttonLabels
+			    );
+		}    
+		else 
+		{
+			logKeluarIOS();
+		}    
+		
 	}
+	
+	
 	
     function onConfirmKeluar(buttonIndex) {
         //alert('You selected button ' + buttonIndex);
@@ -19,6 +31,13 @@ var GLOBAL_IP = "http://10.17.14.210/cams";
         	}
         
     }
+    
+    
+    
+    function logKeluarIOS()
+	{
+		window.location.href = "index.html";
+	}
     
 	
 	function alertError(id)
@@ -154,25 +173,43 @@ var GLOBAL_IP = "http://10.17.14.210/cams";
     
 	function loading(msg) 
 	{
-	
-		//ProgressIndicator.showAnnularWithLabel(false, 150000, "Loading...");
-		ProgressIndicator.showSimpleWithLabel(false, msg);
-	   
-		//alert('masuk loading function');
-    	//cordova.plugins.pDialog.init({
-    	//    theme : 'HOLO_LIGHT',
-    	//    progressStyle : 'SPINNER',
-    	//    cancelable : true,
-    	//    title : 'CAMS-AGC',
-    	//    message : msg
-    	//});
+		var devicePlatform = device.platform;
+		//alert(devicePlatform);
+		
+		if (devicePlatform == "Android")
+		{
+			//alert('masuk loading function');
+	    	cordova.plugins.pDialog.init({
+	    	    theme : 'HOLO_LIGHT',
+	    	    progressStyle : 'SPINNER',
+	    	    cancelable : true,
+	    	    title : 'CAMS-AGC',
+	    	    message : msg
+	    	});		
+			
+	    }
+		
+		else 
+		{
+			//ProgressIndicator.showAnnularWithLabel(false, 150000, "Loading...");
+			ProgressIndicator.showSimpleWithLabel(false, msg);
+		}
 		
 	}
 
 	function unloading() 
 	{
-		ProgressIndicator.hide();
-		//cordova.plugins.pDialog.dismiss();	
+		var devicePlatform = device.platform;
+		if (devicePlatform == "Android")
+		{			
+			cordova.plugins.pDialog.dismiss();	
+		}
+		else
+		{
+			ProgressIndicator.hide();
+		}
+		
+		
 	}
 
 

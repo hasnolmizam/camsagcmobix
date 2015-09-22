@@ -33,7 +33,7 @@
                     <ul class="side-nav" id="mobile-demo">
                         <li class="profile-container"><div class="profile-background"></div><span class="profile-pic"></span>
 						<span id="span_nama" name="span_nama" style="top: calc(50% - 10px);" class="profile-name"></span></li>
-                        <li><a href="dashboard.html"><i class="mdi-action-home left"></i>Utama</a></li>
+                        <li><a href="dashboard.html"><i class="mdi-action-home left"></i>Dashboard</a></li>
                         <li><a href="panduan.html"><i class="mdi-action-description left"></i>Panduan</a></li>
                         <li><a href="konfigurasi.html"><i class="mdi-action-settings left"></i>Konfigurasi</a></li>
                         <li><a href="javascript:;" onclick="logKeluar();"><i class="mdi-action-lock left"></i>Log Keluar</a></li>
@@ -41,7 +41,7 @@
                     <ul class="side-nav hide-on-med-and-down tablet-nav">
                         <li class="profile-container"><div class="profile-background"></div><span class="profile-pic"></span>
 						<span id="span_nama" name="span_nama" style="top: calc(50% - 10px);" class="profile-name"></span></li>
-                        <li><a href="dashboard.html"><i class="mdi-action-home left"></i>Utama</a></li>
+                        <li><a href="dashboard.html"><i class="mdi-action-home left"></i>Dashboard</a></li>
                         <li><a href="panduan.html"><i class="mdi-action-description left"></i>Panduan</a></li>
                         <li><a href="konfigurasi.html"><i class="mdi-action-settings left"></i>Konfigurasi</a></li>
                         <li><a href="javascript:;" onclick="logKeluar();"><i class="mdi-action-lock left"></i>Log Keluar</a></li>
@@ -95,6 +95,10 @@
                             </div>
                             
                             <div class="card-panel" id="penyokongsection" name="penyokongsection">
+		                            <div id="penyokong" name="penyokong" class="row">
+		                                <div class="col s12 m2 label-on-small-only"></div>
+		                                <div id="nama_penyokong_dummy" name="nama_penyokong_dummy" class="col s12 m5"></div>
+		                            </div>
 		                            <div id="penyokong" name="penyokong" class="row">
 		                                <div class="col s12 m2 label-on-small-only">Nama Penyokong</div>
 		                                <div id="nama_penyokong" name="nama_penyokong" class="col s12 m5"></div>
@@ -192,7 +196,12 @@
 		    	      };
 		    	  }
 
-            	
+            	document.addEventListener("backbutton", function(e){
+		        	window.location.href="dashboard.html?nextpage=kelulusan";
+				 }, false);
+				 
+				 
+				 
 					$(".button-collapse").sideNav({edge:'right'});
 					
 					getData();
@@ -590,7 +599,16 @@ function isApprovedByApprover()
 		
 		function showLocation(){
 				var phid = gup('phid');
-				window.location.href = "showlocation4.html?phid=" + phid + "&camefrom=INTERNAL";
+				var devicePlatform = device.platform;
+				if (devicePlatform == "Android")
+				{
+					window.location.href = "showlocation4.html?phid=" + phid + "&camefrom=INTERNAL";
+				}
+				else
+				{
+					//IOS
+					window.location.href = "showlocationIOS.html?phid=" + phid + "&camefrom=INTERNAL";
+				}
 		}
         		 
 		function requestLocation(){
@@ -617,7 +635,7 @@ function isApprovedByApprover()
 					return false;
 				},
                 success: function(data) {
-                    alert("Permintaan koordinat lokasi melalui telefon pintar pemohon telah dihantar. Jika pemohon telah memasang aplikasi CAMS di telefon pintar dan mengaktifkan fungsi JEJAK LOKASI, anda boleh menerima koordinat GPS beliau sebentar lagi.\n\nTerima kasih.");
+                    alert("Permintaan koordinat lokasi melalui telefon pintar pemohon telah dihantar. Jika pemohon telah memasang aplikasi CAMS-AGC di telefon pintar dan mengaktifkan fungsi JEJAK LOKASI, anda akan menerima koordinat GPS beliau sebentar lagi.\n\nTerima kasih.");
 					//window.location.href = "dashboard.html?nextpage=kelulusan";
                     //window.location.href = window.location.href;
                     setTimeout("getDetailApplicationById();",3000);
