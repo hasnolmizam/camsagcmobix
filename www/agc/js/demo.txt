@@ -1,6 +1,0 @@
-{
-             "username":"hanafi",
-             "password":"hanafi123"
-             "email":"hanafi.isa@nc.com.my",
-             "uid": 1100
- }
